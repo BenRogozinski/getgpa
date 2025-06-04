@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GetGPA | Realtime GPA calculator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+  <script>
+    var socket = io();
+
+    socket.on("connect", function() {
+      console.log("Connected to server");
+    });
+
+    socket.on("log", function(msg) {
+      var li = document.createElement("li");
+      li.textContent = msg;
+      document.getElementById("messages").appendChild(li);
+    });
+
+    function calculate_gpa() {
+      const messages = document.getElementById("messages")
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      messages.innerHTML = "";
+      socket.emit("calculate", {
+        username,
+        password
+      });
+    }
+  </script>
+</head>
+<body>
+  <h1>GetGPA</h1>
+  <input type="text" id="username" placeholder="Aspen username (no @cps.edu)">
+  <input type="password" id="password" placeholder="Aspen password">
+  <button onclick="calculate_gpa()">Send</button>
+  <ul id="messages"></ul>
+</body>
+</html>
