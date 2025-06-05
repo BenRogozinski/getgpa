@@ -22,6 +22,7 @@ def calculate_gpa(credentials: dict):
         aspen = Aspen(username, password)
     except Exception as e:
         emit("log", str(e))
+        emit("results", { "error": True })
         return
     
     emit("log", "Getting current transcript")

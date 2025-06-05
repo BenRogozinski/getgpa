@@ -1,14 +1,9 @@
 /* Global Styles */
 html, body {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  height: fit-content;
   background-color: black;
-}
-
-@media (max-width: 800px) {
-  html, body {
-    height: fit-content;
-  }
 }
 
 body {
@@ -118,6 +113,12 @@ body {
   border-radius: 12px;
   font-size: 20px;
   font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.15s linear;
+}
+
+.inputContainer button:hover {
+  transform: scale(110%);
 }
 
 /* GPA Results Section */

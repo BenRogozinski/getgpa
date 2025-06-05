@@ -26,21 +26,28 @@
 
     // Handle GPA results from the server
     socket.on("results", (msg) => {
-      const { unweighted, weighted } = msg;
+      const { unweighted, weighted, error } = msg;
+      const calculateButton = document.getElementById("calculateButton");
+      const gpaContainer = document.getElementById("gpaContainer");
       const unweightedText = document.getElementById("unweighted");
       const weightedText = document.getElementById("weighted");
-      const gpaContainer = document.getElementById("gpaContainer");
 
-      unweightedText.textContent = unweighted;
-      weightedText.textContent = weighted;
+      if (!error) {
+        unweightedText.textContent = unweighted;
+        weightedText.textContent = weighted;
+        gpaContainer.classList.remove("hidden");
+        gpaContainer.scrollIntoView({ behavior: "smooth" });
+      }
 
-      gpaContainer.classList.remove("hidden");
-      gpaContainer.scrollIntoView({ behavior: "smooth" });
+      calculateButton.disabled = false;
     });
 
     // Emit GPA calculation request to the server
     function calculate_gpa() {
+      const calculateButton = document.getElementById("calculateButton");
       const gpaContainer = document.getElementById("gpaContainer");
+
+      calculateButton.disabled = true;
       gpaContainer.classList.add("hidden");
 
       const username = document.getElementById("username").value;
@@ -71,7 +78,7 @@
       <input type="password" id="password" placeholder="Aspen password">
       
       <p id="message"></p>
-      <button onclick="calculate_gpa()">Calculate GPA &gt;</button>
+      <button onclick="calculate_gpa()" id="calculateButton">Calculate GPA &gt;</button>
     </div>
 
     <!-- Log Section -->
