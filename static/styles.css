@@ -1,0 +1,190 @@
+/* Global Styles */
+html, body {
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+}
+
+@media (max-width: 800px) {
+  html, body {
+    height: fit-content;
+  }
+}
+
+body {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  font-family: sans-serif;
+  text-align: center;
+  background:
+    radial-gradient(circle at 20px 100px, rgba(63, 94, 251, 1) 0%, rgba(71, 32, 129, 1) 60%, rgba(0, 0, 0, 0) 100%),
+    radial-gradient(circle at bottom right, rgba(63, 94, 251, 1) 0%, rgba(71, 32, 129, 1) 60%, rgba(0, 0, 0, 0) 90%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Content Section */
+.content {
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  color: #e0e0e0;
+  gap: 20px;
+}
+
+.title {
+  font-size: 50px;
+}
+
+.description {
+  font-weight: normal;
+  max-width: 50%;
+  font-size: 20px;
+}
+
+@media (max-width: 800px) {
+  .description {
+    max-width: 100%;
+  }
+}
+
+/* Input Section */
+.inputContainer {
+  width: fit-content;
+  padding: 20px;
+  height: fit-content;
+  background-color: rgba(37, 37, 37, 0.185);
+  border-radius: 20px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.inputContainer h1 {
+  font-size: 28px;
+}
+
+.inputContainer h2 {
+  font-size: 20px;
+  color: #c0c0c0;
+}
+
+.inputContainer label {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.inputContainer input {
+  width: 80%;
+  height: 40px;
+  background-color: rgba(209, 209, 209, 0.185);
+  border: none;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 20px;
+  color: #e0e0e0;
+}
+
+.inputContainer input:focus {
+  outline: none;
+}
+
+.inputContainer input:-webkit-autofill,
+.inputContainer input:-webkit-autofill:hover,
+.inputContainer input:-webkit-autofill:focus {
+  background-color: rgba(209, 209, 209, 0.185) !important;
+  color: #e0e0e0 !important;
+  -webkit-text-fill-color: #e0e0e0 !important;
+  border: none;
+  border-radius: 12px;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.inputContainer button {
+  width: 200px;
+  height: 30px;
+  background-color: #e0e0e0d5;
+  border: none;
+  border-radius: 12px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* GPA Results Section */
+.gpaContainer {
+  display: flex;
+  flex-flow: column;
+  justify-content: top;
+  gap: 20px;
+  transition: opacity 2s ease-in-out;
+  height: fit-content;
+}
+
+.gpaValueContainer {
+  display: flex;
+  flex-flow: row;
+  gap: 30px;
+}
+
+@media (max-width: 800px) {
+  .gpaValueContainer {
+    flex-flow: column;
+  }
+}
+
+.gpaValue {
+  width: 240px;
+  height: 240px;
+  border-radius: 30px;
+  background-color: rgba(37, 37, 37, 0.185);
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.gpaValue h1 {
+  font-size: 60px;
+}
+
+/* Footer Section */
+.footer {
+  display: flex;
+  flex-flow: row;
+  gap: 30px;
+}
+
+@media (max-width: 800px) {
+  .footer {
+    margin-top: 20px;
+    flex-flow: column;
+  }
+  .footer p:nth-child(2) {
+    display: none;
+  }
+}
+
+.footer p {
+  font-size: 20px;
+  font-weight: bold;
+  color: #e0e0e0;
+}
+
+.footer a {
+  color: #e0e0e0;
+}
+
+/* Utility Classes */
+.hidden {
+  opacity: 0%;
+  transition: opacity 0.5s ease-in;
+}

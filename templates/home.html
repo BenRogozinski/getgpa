@@ -1,38 +1,103 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>GetGPA | Realtime GPA calculator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GetGPA | Realtime GPA Calculator</title>
+
+  <!-- AsPlanned Favicon -->
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+  <!-- External Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+  <!-- JavaScript -->
   <script>
-    var socket = io();
+    const socket = io();
 
-    socket.on("connect", function() {
-      console.log("Connected to server");
+    // Handle log messages from the server
+    socket.on("log", (msg) => {
+      const message = document.getElementById("message");
+      message.textContent = msg;
     });
 
-    socket.on("log", function(msg) {
-      var li = document.createElement("li");
-      li.textContent = msg;
-      document.getElementById("messages").appendChild(li);
+    // Handle GPA results from the server
+    socket.on("results", (msg) => {
+      const { unweighted, weighted } = msg;
+      const unweightedText = document.getElementById("unweighted");
+      const weightedText = document.getElementById("weighted");
+      const gpaContainer = document.getElementById("gpaContainer");
+
+      unweightedText.textContent = unweighted;
+      weightedText.textContent = weighted;
+
+      gpaContainer.classList.remove("hidden");
+      gpaContainer.scrollIntoView({ behavior: "smooth" });
     });
 
+    // Emit GPA calculation request to the server
     function calculate_gpa() {
-      const messages = document.getElementById("messages")
+      const gpaContainer = document.getElementById("gpaContainer");
+      gpaContainer.classList.add("hidden");
+
       const username = document.getElementById("username").value;
       const password = document.getElementById("password").value;
-      messages.innerHTML = "";
-      socket.emit("calculate", {
-        username,
-        password
-      });
+
+      socket.emit("calculate", { username, password });
     }
   </script>
 </head>
 <body>
-  <h1>GetGPA</h1>
-  <input type="text" id="username" placeholder="Aspen username (no @cps.edu)">
-  <input type="password" id="password" placeholder="Aspen password">
-  <button onclick="calculate_gpa()">Send</button>
-  <ul id="messages"></ul>
+  <div class="content">
+    <!-- Header Section -->
+    <h1 class="title">GetGPA</h1>
+    <h2 class="description">
+      Skip the wait until the end of the semester - <strong>instantly</strong> calculate your GPA from Aspen!<br>
+      This feature will be added to AsPlanned once it's finished!
+    </h2>
+
+    <!-- Input Section -->
+    <div class="inputContainer">
+      <h1>Enter your Aspen login to get started</h1>
+      <h2>Please do not include "@cps.edu"</h2>
+      
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="Aspen username">
+      
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Aspen password">
+      
+      <p id="message"></p>
+      <button onclick="calculate_gpa()">Calculate GPA &gt;</button>
+    </div>
+
+    <!-- Log Section -->
+    <ul id="log"></ul>
+
+    <!-- GPA Results Section -->
+    <div id="gpaContainer" class="gpaContainer hidden">
+      <h1>Results are in!</h1>
+      <div class="gpaValueContainer">
+        <div class="gpaValue">
+          <h1 id="unweighted"></h1>
+          <p>Un-Weighted</p>
+        </div>
+        <div class="gpaValue">
+          <h1 id="weighted"></h1>
+          <p>Weighted</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <div class="footer">
+    <p>Made by Ben Rogozinski</p>
+    <p>👾</p>
+    <p>Source code can be found <a href="https://github.com/BenRogozinski/getgpa">here</a></p>
+  </div>
 </body>
 </html>
