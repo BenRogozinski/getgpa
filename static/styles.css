@@ -79,7 +79,7 @@ body {
   font-weight: bold;
 }
 
-.inputContainer input {
+.textInput {
   width: 80%;
   height: 40px;
   background-color: rgba(209, 209, 209, 0.185);
@@ -90,13 +90,13 @@ body {
   color: #e0e0e0;
 }
 
-.inputContainer input:focus {
+.textInput:focus {
   outline: none;
 }
 
-.inputContainer input:-webkit-autofill,
-.inputContainer input:-webkit-autofill:hover,
-.inputContainer input:-webkit-autofill:focus {
+.textInput:-webkit-autofill,
+.textInput:-webkit-autofill:hover,
+.textInput:-webkit-autofill:focus {
   background-color: rgba(209, 209, 209, 0.185) !important;
   color: #e0e0e0 !important;
   -webkit-text-fill-color: #e0e0e0 !important;
@@ -105,7 +105,7 @@ body {
   transition: background-color 5000s ease-in-out 0s;
 }
 
-.inputContainer button {
+.submitButton {
   width: 200px;
   height: 30px;
   background-color: #e0e0e0d5;
@@ -117,7 +117,7 @@ body {
   transition: transform 0.15s linear;
 }
 
-.inputContainer button:hover {
+.submitButton:hover {
   transform: scale(110%);
 }
 
