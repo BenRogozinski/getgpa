@@ -32,7 +32,6 @@ def calculate_gpa(credentials: dict):
 
     emit("log", "Calculating GPA")
     unweighted_gpa, weighted_gpa = calculate_gpa(transcript, grades)
-    print(unweighted_gpa, weighted_gpa)
 
     emit("results", {
         "unweighted": f"{unweighted_gpa:.3f}",
