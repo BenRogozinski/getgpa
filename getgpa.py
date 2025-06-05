@@ -60,4 +60,4 @@ def calculate_gpa(transcript, grades):
     return unweighted_gpa, weighted_gpa
 
 if __name__ == "__main__":
-    socketio.run(app, "0.0.0.0", 8080, debug=True)
+    socketio.run(app, "0.0.0.0", 8080, debug=True, allow_unsafe_werkzeug=True)
